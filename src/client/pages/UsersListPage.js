@@ -29,4 +29,13 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchUsers })(UsersList)
+function loadData(store) {
+  console.log('Try to Load data')
+  return store.dispatch(fetchUsers())
+}
+
+
+export default {
+  loadData,
+  component: connect(mapStateToProps, { fetchUsers })(UsersList)
+}
