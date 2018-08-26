@@ -1,5 +1,6 @@
 import HomePage from './pages/HomePage'
 import UsersListPage, { loadData } from './pages/UsersListPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 export default [
   {
@@ -10,5 +11,8 @@ export default [
   {
     ...UsersListPage,
     path: '/users'
+  },
+  {
+    ...NotFoundPage
   }
 ]
