@@ -1,32 +1,24 @@
-import express from 'express'
-import renderer from './helpers/renderer'
-import createStore from './helpers/createStore'
-import { matchRoutes } from 'react-router-config'
-import Routes from './client/Routes'
+import React from 'react'
+import thunk from 'redux-thunk'
+import { BrowserRouter } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
+import { hydrate } from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
 
-const app = express()
+import reducers from './reducers'
+import routes from './routes'
 
-app.use(express.static('public'))
+const store = createStore(
+  reducers,
+  window.INITIAL_STATE,
+  applyMiddleware(thunk)
+)
 
-app.get('*', (req, res) => {
-  const store = createStore()
-
-  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-    return route.loadData ? route.loadData(store) : null
-  })
-
-  Promise.all(promises).then(() => {
-    const context = {}
-    const content = renderer(req, store, context)
-
-    if (context.notFound) {
-      res.status(404)
-    }
-    
-    res.send(content)
-  })
-})
-
-app.listen(3000, () => {
-  console.log('Listening on port 3000')
-})
+hydrate(
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>{renderRoutes(routes)}</div>
+    </BrowserRouter>
+  </Provider>, 
+document.getElementById('root'))

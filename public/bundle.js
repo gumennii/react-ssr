@@ -5920,9 +5920,9 @@ var _reducers = __webpack_require__(190);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _Routes = __webpack_require__(239);
+var _routes = __webpack_require__(239);
 
-var _Routes2 = _interopRequireDefault(_Routes);
+var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5937,7 +5937,7 @@ var store = (0, _redux.createStore)(_reducers2.default, window.INITIAL_STATE, (0
     _react2.default.createElement(
       'div',
       null,
-      (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
+      (0, _reactRouterConfig.renderRoutes)(_routes2.default)
     )
   )
 ), document.getElementById('root'));

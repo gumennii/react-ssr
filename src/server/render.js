@@ -6,13 +6,13 @@ import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
 import { Helmet } from 'react-helmet'
 
-import Routes from '../client/Routes'
+import routes from '../routes'
 
 export default (req, store, context) => {
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={context}>
-        <div>{renderRoutes(Routes)}</div>
+        <div>{renderRoutes(routes)}</div>
       </StaticRouter>
     </Provider>
   )
@@ -31,7 +31,7 @@ export default (req, store, context) => {
         <script>
           window.INITIAL_STATE = ${serialize(store.getState())}
         </script>
-        <script src="bundle.js"></script>
+        <script src="/bundle.js"></script>
       </body>
     </html>
   `
